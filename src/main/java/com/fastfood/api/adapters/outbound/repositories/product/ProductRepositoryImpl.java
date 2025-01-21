@@ -73,7 +73,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     public Product updateProduct(Long id, Product product) {
         var currentProduct = jpaProductRepository.findById(id).orElseThrow();
 
-        currentProduct.setId(currentProduct.getId())
+        currentProduct.setId(currentProduct.getId());
         currentProduct.setActive(currentProduct.getActive());
         currentProduct.setCategory(product.getCategory().toString());
         currentProduct.setDescription(product.getDescription());
