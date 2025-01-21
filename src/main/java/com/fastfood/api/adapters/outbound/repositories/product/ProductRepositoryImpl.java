@@ -73,12 +73,13 @@ public class ProductRepositoryImpl implements ProductRepository {
     public Product updateProduct(Long id, Product product) {
         var currentProduct = jpaProductRepository.findById(id).orElseThrow();
 
-        currentProduct.setActive(product.getActive());
+        currentProduct.setId(currentProduct.getId())
+        currentProduct.setActive(currentProduct.getActive());
         currentProduct.setCategory(product.getCategory().toString());
         currentProduct.setDescription(product.getDescription());
         currentProduct.setName(product.getName());
         currentProduct.setPrice(product.getPrice());
-        currentProduct.setCreatedAt(product.getCreatedAt());
+        currentProduct.setCreatedAt(currentProduct.getCreatedAt());
         currentProduct.setUpdatedAt(LocalDateTime.now());
 
         jpaProductImageRepository.deleteAllImagesByProductId(id);
@@ -86,7 +87,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         List<JpaProductImageEntity> newImages = new ArrayList<>();
         if (product.getImages() != null) {
             newImages = product.getImages().stream()
-                    .map(image -> new JpaProductImageEntity(currentProduct.getId(), image.getUrl(), null, LocalDateTime.now()))
+                    .map(image -> new JpaProductImageEntity(currentProduct.getId(), image.getUrl(), LocalDateTime.now(), LocalDateTime.now()))
                     .toList();
         }
 
