@@ -20,6 +20,8 @@ Este código se trata de um sistema monolítico encarregado de gerenciar a cria�
 
 O projeto segue a Arquitetura Hexagonal (Ports and Adapters), permitindo maior flexibilidade e facilidade de manutenção.
 
+![Imagem da arquitetura hexagonal](./assets/hex-ports-adapters.svg)
+
 ## Problema
 
 Há uma lanchonete de bairro que está se expandindo devido seu grande
@@ -76,9 +78,32 @@ Construir a imagem da aplicação usando o `Dockerfile`.
 Configurar e iniciar o banco de dados PostgreSQL.
 Inicializar a aplicação configurada para rodar na porta 8080.
 
+Com tudo ocorrendo bem, os seguintes logs serão visualizados:
+
+Build da imagem da aplicação utilizando o Dockerfile:
+
+
+![Imagem do build da app](./assets/build-docker.png)
+
+Criação do volume e containers:
+
+![Imagem da criacao do volume e containers](./assets/containers.png)
+
+Banco inicializado com sucesso:
+
+
+![Imagem do banco inicializado](./assets/db-container.png)
+
+Aplição inicializada e rodando:
+
+![aplicacao rodando](./assets/application-running.png)
+
+
 3. Após a execução do comando, você pode verificar os containers ativos com o comando: `docker container ls`
 
 O resultado esperado será semelhante ao seguinte:
+
+![Comando docker container ls](./assets/container-ls.png)
 
 4. A aplicação estará disponível no endereço: http://localhost:8080
 
@@ -138,7 +163,7 @@ Link para acessar ao swagger após subir a aplicação:
 http://localhost:8080/swagger-ui.html
 ```
 
-## 📚 MIRO - Event Storming
+## MIRO - Event Storming
 
 ![Event Storming](./assets/event_storming.png)
 
