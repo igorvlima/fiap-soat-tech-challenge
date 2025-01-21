@@ -38,12 +38,11 @@ CREATE SEQUENCE order_id_seq START 1;
 
 CREATE TABLE "order" (
                          id BIGINT DEFAULT nextval('order_id_seq') PRIMARY KEY,
-                         customer_id BIGINT NOT NULL,
+                         customer_id BIGINT,
                          total NUMERIC(19, 2) NOT NULL,
                          status VARCHAR(255) NOT NULL,
                          waiting_time_in_minutes BIGINT,
-                         created_at TIMESTAMP NOT NULL,
-                         CONSTRAINT fk_customer FOREIGN KEY (customer_id) REFERENCES customer (id)
+                         created_at TIMESTAMP NOT NULL
 );
 
 CREATE SEQUENCE order_item_id_seq START 1;
