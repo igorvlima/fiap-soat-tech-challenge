@@ -26,7 +26,7 @@ services:
       - tcnetwork
 
   db:
-    image: 'postgres:15-alpine'
+    image: 'postgres:latest'
     container_name: tech-challenge-db
     restart: always
     hostname: postgres

@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @SequenceGenerator(name = "order_item_seq_gen", sequenceName = "order_item_id_seq", allocationSize = 1)
 public class JpaOrderItemEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_item_seq_gen")
     private Long id;
     private Long orderId;
     private Long productId;
