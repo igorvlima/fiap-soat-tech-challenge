@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: tech-challenge-app
+    environment:
+      SPRING_APPLICATION_NAME: tech-challenge-fast-food
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/techchallenge
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 123
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
+      SPRING_FLYWAY_ENABLED: "true"
+      SPRING_FLYWAY_BASELINE_ON_MIGRATE: "true"
+      SPRING_FLYWAY_VALIDATE_ON_MIGRATE: "true"
+      SPRING_FLYWAY_LOCATIONS: classpath:db/migration
+      SPRING_PROFILES_ACTIVE: prod
+    ports:
+      - '8080:8080'
+    depends_on:
+      db:
+        condition: service_healthy
+    links:
+      - db
+    networks:
+      - tcnetwork
+
+  db:
+    image: 'postgres:15-alpine'
+    container_name: tech-challenge-db
+    restart: always
+    hostname: postgres
+    environment:
+      POSTGRES_DB: techchallenge
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - tcnetwork
+
+volumes:
+  db:
+    driver: local
+
+networks:
+  tcnetwork:
+    name: tech-challenge-network
