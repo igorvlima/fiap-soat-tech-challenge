@@ -24,6 +24,7 @@ public class JpaOrderEntity {
     private Long id;
     private Long customerId;
     private BigDecimal total;
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
     private Long waitingTimeInMinutes;
     private LocalDateTime createdAt;

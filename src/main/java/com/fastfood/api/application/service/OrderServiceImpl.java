@@ -50,10 +50,23 @@ public class OrderServiceImpl implements OrderUseCase {
             throw new IllegalStateException("O pedido já está finalizado e não pode ser atualizado novamente.");
         }
 
-        OrderStatus[] statuses = OrderStatus.values();
-        int currentIndex = order.getStatus().ordinal();
-        order.setStatus(statuses[currentIndex + 1]);
+        OrderStatus nextStatus = getNextOrderStatus(order.getStatus());
+
+        order.setStatus(nextStatus);
+
         return orderMapper.domainToDTO(orderRepository.save(order));
+    }
+    
+        @Override
+    public OrderStatus getNextOrderStatus(OrderStatus status) {
+        OrderStatus[] statuses = OrderStatus.values();
+        int currentIndex = status.ordinal();
+
+        if (currentIndex + 1 >= statuses.length) {
+            throw new IllegalStateException("Não é possível avançar o status do pedido.");
+        }
+
+        return statuses[currentIndex + 1];
     }
 
     @Override

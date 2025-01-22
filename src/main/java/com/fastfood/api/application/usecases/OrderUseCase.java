@@ -20,4 +20,6 @@ public interface OrderUseCase {
     BigDecimal calculateTotalValue(List<Product> productList, List<OrderItemDTO> orderItemDTOS);
 
     List<OrderDTO> findOrderByStatus(OrderStatus status);
+
+    OrderStatus getNextOrderStatus(OrderStatus status);
 }
