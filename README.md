@@ -165,7 +165,5 @@ http://localhost:8080/swagger-ui.html
 
 ## MIRO - Event Storming
 
-![Event Storming](./assets/event_storming.png)
-
 O miro contendo o event storming está disponível em:
-[Event Storming](https://miro.com)
+[Event Storming](https://miro.com/app/board/uXjVLuoEkEs=/?share_link_id=697063349625)
